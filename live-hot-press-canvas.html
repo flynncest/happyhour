@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Live Hot Press Canvas — Happy Hour Events</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="shared.css">
+  <style>
+    .page-hero { padding: 160px 48px 80px; background: var(--beige4); }
+    .page-hero-eyebrow { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.45; margin-bottom: 20px; }
+    .page-hero-h1 { font-size: clamp(52px, 8vw, 120px); text-transform: uppercase; line-height: 0.92; letter-spacing: -0.01em; margin-bottom: 28px; }
+    .page-hero-sub { font-size: 17px; line-height: 1.72; opacity: 0.62; max-width: 480px; }
+    .page-hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3px; margin-top: 64px; }
+    .page-hero-grid img { width: 100%; height: 480px; object-fit: cover; display: block; }
+    .section { padding: 88px 48px; }
+    .benefits-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 3px; margin-top: 48px; }
+    .benefit { background: var(--grey); padding: 32px 24px; }
+    .benefit-num { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; opacity: 0.38; margin-bottom: 14px; }
+    .benefit-title { font-size: 15px; line-height: 1.3; margin-bottom: 10px; }
+    .benefit-text { font-size: 13px; line-height: 1.72; opacity: 0.6; }
+    .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3px; margin-top: 48px; }
+    .step { padding: 36px 28px; border: 1px solid rgba(0,0,0,0.08); }
+    .step-num { font-size: clamp(40px, 5vw, 64px); opacity: 0.1; line-height: 1; margin-bottom: 16px; }
+    .step-title { font-size: 16px; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 12px; }
+    .step-text { font-size: 13px; line-height: 1.72; opacity: 0.6; }
+    #pricing { background: var(--grey); padding: 88px 48px; }
+    .pricing-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3px; margin-top: 48px; }
+    .pricing-card { background: var(--white); padding: 40px 36px; }
+    .pricing-card.featured { background: var(--black); color: var(--white); }
+    .pricing-badge { display: inline-block; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; background: var(--accent); color: var(--white); padding: 5px 14px; border-radius: 100px; margin-bottom: 22px; }
+    .pricing-badge-outline { background: rgba(255,255,255,0.15); }
+    .pricing-name { font-size: clamp(24px, 3.5vw, 42px); text-transform: uppercase; line-height: 1; margin-bottom: 8px; }
+    .pricing-tagline { font-size: 14px; opacity: 0.55; margin-bottom: 28px; }
+    .pricing-card.featured .pricing-tagline { opacity: 0.6; }
+    .pricing-list { list-style: none; margin-bottom: 32px; }
+    .pricing-list li { font-size: 13px; line-height: 1.6; padding: 8px 0; border-bottom: 1px solid rgba(0,0,0,0.07); opacity: 0.75; display: flex; gap: 10px; align-items: flex-start; }
+    .pricing-card.featured .pricing-list li { border-bottom-color: rgba(255,255,255,0.1); opacity: 0.8; }
+    .pricing-list li::before { content: '✓'; color: var(--accent); flex-shrink: 0; }
+    .pricing-note { font-size: 11px; opacity: 0.4; letter-spacing: 0.06em; margin-top: 16px; }
+    .pricing-card.featured .pricing-note { opacity: 0.45; }
+    .btn-pill-white { background: var(--white); color: var(--black); }
+    .btn-pill-white:hover { background: var(--accent); color: var(--white); }
+    #faq { background: var(--white); padding: 88px 48px; }
+    .faq-wrap { max-width: 720px; margin: 0 auto; }
+    .faq-label { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.42; text-align: center; margin-bottom: 16px; }
+    .faq-heading { font-size: clamp(32px, 4.5vw, 56px); text-align: center; margin-bottom: 48px; }
+    .faq-item { border-top: 1px solid rgba(0,0,0,0.09); }
+    .faq-item:last-child { border-bottom: 1px solid rgba(0,0,0,0.09); }
+    .faq-q { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 20px 0; cursor: pointer; user-select: none; }
+    .faq-q-text { font-size: 15px; line-height: 1.4; }
+    .faq-icon { font-size: 22px; font-weight: 300; flex-shrink: 0; width: 28px; text-align: center; transition: transform 0.3s; color: var(--accent); }
+    .faq-item.open .faq-icon { transform: rotate(45deg); }
+    .faq-a { font-size: 13.5px; line-height: 1.75; opacity: 0.58; max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding-bottom 0.3s; }
+    .faq-item.open .faq-a { max-height: 300px; padding-bottom: 20px; }
+    @media (max-width: 900px) {
+      .page-hero { padding: 130px 24px 60px; }
+      .page-hero-grid { grid-template-columns: 1fr; }
+      .page-hero-grid img { height: 260px; }
+      .section, #pricing, #faq { padding: 64px 24px; }
+      .benefits-grid { grid-template-columns: 1fr 1fr; }
+      .steps { grid-template-columns: 1fr; }
+      .pricing-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 560px) { .benefits-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="nav-pill">
+    <a href="index.html"><img class="nav-logo" src="logo.png" alt="Happy Hour Events"></a>
+    <ul class="nav-links">
+      <li class="nav-dd">
+        <a href="index.html#activations" class="nav-dd-toggle">Activations <span class="nav-dd-arrow">▾</span></a>
+        <div class="nav-dd-menu">
+          <a href="live-monogramming.html">Live Monogramming</a>
+          <a href="perfume-bar.html">Perfume Bar</a>
+          <a href="clicker-bar.html">Clicker Bar</a>
+          <a href="live-hot-press-canvas.html">Live Hot Press Canvas</a>
+        </div>
+      </li>
+      <li><a href="catalogue.html">Catalogus</a></li>
+      <li><a href="index.html#welcome">Private &amp; Corporate</a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li><a href="#cta" class="nav-book">Boek nu</a></li>
+    </ul>
+    <button class="nav-burger" onclick="toggleDrawer()" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<div class="drawer" id="drawer">
+  <span class="drawer-section-label">Activations</span>
+  <a href="live-monogramming.html"    class="drawer-sub" onclick="closeDrawer()">Live Monogramming</a>
+  <a href="perfume-bar.html"          class="drawer-sub" onclick="closeDrawer()">Perfume Bar</a>
+  <a href="clicker-bar.html"          class="drawer-sub" onclick="closeDrawer()">Clicker Bar</a>
+  <a href="live-hot-press-canvas.html" class="drawer-sub" onclick="closeDrawer()">Live Hot Press Canvas</a>
+  <a href="catalogue.html"   onclick="closeDrawer()">Catalogus</a>
+  <a href="index.html#welcome" onclick="closeDrawer()">Private &amp; Corporate</a>
+  <a href="#cta"             onclick="closeDrawer()">Boek nu</a>
+</div>
+
+<!-- HERO -->
+<section class="page-hero">
+  <p class="page-hero-eyebrow">Activation 04 — Live op je event</p>
+  <h1 class="page-hero-h1">Live Hot<br>Press Canvas</h1>
+  <p class="page-hero-sub">Kunstwerken die ter plekke ontstaan. Gasten kiezen een motief — wij drukken het warm in canvas. Elke afdruk is anders. Elke afdruk is écht. Het is geen cadeau, het is een herinnering aan een moment.</p>
+  <div class="page-hero-grid">
+    <img src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=900&h=700&fit=crop&auto=format" alt="Hot Press Canvas">
+    <img src="https://images.unsplash.com/photo-1531913764164-f85c52e6e654?w=900&h=700&fit=crop&auto=format" alt="Canvas art">
+  </div>
+</section>
+
+<!-- BENEFITS -->
+<section class="section">
+  <h2 class="sec-head" style="text-align:center;">Waarom Hot<br>Press Canvas?</h2>
+  <div class="benefits-grid">
+    <div class="benefit">
+      <p class="benefit-num">01</p>
+      <p class="benefit-title">Visueel spektakel</p>
+      <p class="benefit-text">Hitte, druk, geur van canvas — het live hot press-moment is puur theater. Gasten verzamelen zich eromheen, kijken mee en willen allemaal als volgende.</p>
+    </div>
+    <div class="benefit">
+      <p class="benefit-num">02</p>
+      <p class="benefit-title">Kunstwerk als cadeau</p>
+      <p class="benefit-text">Canvas hangt thuis aan de muur. Dat is het enige event-cadeau dat ooit ophangen verdient. Jouw merk bij mensen thuis, jaren later.</p>
+    </div>
+    <div class="benefit">
+      <p class="benefit-num">03</p>
+      <p class="benefit-title">Volledig naar merk</p>
+      <p class="benefit-text">Motief, canvas-formaat, brandedverpakking — alles afgestemd op jouw event. Exclusieve motieven op aanvraag.</p>
+    </div>
+    <div class="benefit">
+      <p class="benefit-num">04</p>
+      <p class="benefit-title">Voor élk publiek</p>
+      <p class="benefit-text">Kunst spreekt universeel. Van teambuilding tot bruiloft tot productlancering — hot press canvas past altijd en overal.</p>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="section" style="background: var(--white);">
+  <h2 class="sec-head" style="text-align:center;">Hoe het werkt</h2>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">01</div>
+      <p class="step-title">Kies je motief</p>
+      <p class="step-text">Uit een selectie van motieven (of een exclusief motief dat we vooraf ontwerpen voor jouw event) kiest elke gast wat bij hem past.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <p class="step-title">Live geperst</p>
+      <p class="step-text">Het motief wordt met een verwarmde press in het canvas gedrukt. Het duurt seconden — maar het is spectaculair om te zien.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">03</div>
+      <p class="step-title">Klaar om mee te nemen</p>
+      <p class="step-text">Het canvas koelt snel af en is direct klaar. Optioneel verpakt in een brandedtasje of rol. Kunst om cadeau te geven — of zelf te bewaren.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing">
+  <h2 class="sec-head" style="text-align:center;">Kies jouw pakket</h2>
+  <div class="pricing-grid">
+
+    <div class="pricing-card">
+      <span class="pricing-badge">Starter Kit</span>
+      <h3 class="pricing-name">DIY Pakket</h3>
+      <p class="pricing-tagline">Wij sturen alles. Jij organiseert zelf.</p>
+      <ul class="pricing-list">
+        <li>Vooraf samengesteld pakket op maat</li>
+        <li>Canvas-stukken in het gewenste formaat</li>
+        <li>Voorgeconfigureerde press met gekozen motief(en)</li>
+        <li>Instructievideo en gids voor gebruik op de dag</li>
+        <li>Branded verpakking voor afgeleverde stukken</li>
+        <li>Stuur apparatuur retour na het event</li>
+        <li>Geen begeleider aanwezig — jij runt de bar</li>
+      </ul>
+      <a class="btn-pill" href="mailto:hallo@happyhourevents.nl?subject=Offerte Hot Press Canvas - Starter Kit">Vraag offerte aan ↗</a>
+      <p class="pricing-note">Prijs op aanvraag. Geschikt voor events met goede on-site coördinator.</p>
+    </div>
+
+    <div class="pricing-card featured">
+      <span class="pricing-badge pricing-badge-outline">Full Service</span>
+      <h3 class="pricing-name">Volledige Begeleiding</h3>
+      <p class="pricing-tagline">Wij zorgen voor het spektakel. Van begin tot eind.</p>
+      <ul class="pricing-list">
+        <li>Getrainde artisan aanwezig op het event</li>
+        <li>Volledige setup en afbouw door ons team</li>
+        <li>Exclusief motief-ontwerp vooraf (op aanvraag)</li>
+        <li>Canvas, press en branded verpakking inbegrepen</li>
+        <li>Persoonlijke begeleiding van elke gast</li>
+        <li>Flexibele duur: 2 tot 5 uur</li>
+        <li>Geschikt voor 20 tot 400+ gasten</li>
+      </ul>
+      <a class="btn-pill btn-pill-white" href="mailto:hallo@happyhourevents.nl?subject=Offerte Hot Press Canvas - Full Service">Vraag offerte aan ↗</a>
+      <p class="pricing-note">Prijs op aanvraag — afhankelijk van gastaantal, motief-maatwerk en locatie.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="faq-wrap">
+    <p class="faq-label">Veelgestelde vragen</p>
+    <h2 class="faq-heading">Over Hot Press Canvas</h2>
+
+    <div class="faq-item open">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        <span class="faq-q-text">Welke motieven zijn beschikbaar?</span>
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-a">We hebben een collectie van bloemen, geometrische vormen, teksten en abstracte patronen. Voor Full Service events ontwerpen we ook exclusieve motieven op basis van jouw huisstijl of eventthema. Stuur ons je wensen en we sturen een moodboard.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        <span class="faq-q-text">In welk formaat komen de canvas-stukken?</span>
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-a">We werken met A5 (postcard size), A4 en A3 formaten. Klein voor een tas of als kaart; groter voor een wandpaneel. Kies vooraf welk formaat bij jouw event en publiek past.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        <span class="faq-q-text">Is het veilig? Wordt het erg warm?</span>
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-a">De press werkt met gecontroleerde hitte die alleen het motief-oppervlak raakt. Ons team of de meegeleverde instructie zorgt voor veilig gebruik. Er is geen open vlam, geen rook, geen gevaar. Gasten van alle leeftijden kunnen veilig deelnemen (met begeleiding voor kinderen).</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        <span class="faq-q-text">Hoe lang duurt het per stuk?</span>
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-a">Het daadwerkelijke persen duurt 30–60 seconden. Met keuze van motief en kort wachten op afkoelen zit je op 3–5 minuten per gast. Bij grotere events zetten we meerdere presses neer om wachtrijen te vermijden.</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="cta" class="cta-section">
+  <p class="cta-label">Gratis kennismakingsgesprek — 20 min</p>
+  <h2 class="cta-h2">Maak indruk<br>die blijft hangen.</h2>
+  <p class="cta-sub">Letterlijk. Een canvas-werk gaat aan de muur. Bekijk of jouw datum nog beschikbaar is — en geef je gasten een souvenir dat ze echt bewaren.</p>
+  <a class="btn-pill" href="mailto:hallo@happyhourevents.nl?subject=Offerte Hot Press Canvas">Bekijk beschikbaarheid ↗</a>
+  <div style="height: 110px;"></div>
+</section>
+
+<footer>
+  <div class="footer-main">
+    <div>
+      <p class="footer-sub-text">Schrijf je in voor event inspiratie en updates, één keer per maand.</p>
+      <div class="footer-form">
+        <input type="email" placeholder="Jouw e-mailadres">
+        <button class="footer-submit" type="button">STUUR <span style="font-size:14px;">→</span></button>
+      </div>
+    </div>
+    <div class="act-rows">
+      <a class="act-row" href="live-monogramming.html"><img class="act-row-thumb" src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=120&h=120&fit=crop&auto=format" alt=""><span class="act-row-name">Live Monogramming</span><span class="act-row-arrow">BEKIJK →</span></a>
+      <a class="act-row" href="perfume-bar.html"><img class="act-row-thumb" src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=120&h=120&fit=crop&auto=format" alt=""><span class="act-row-name">Perfume Bar</span><span class="act-row-arrow">BEKIJK →</span></a>
+      <a class="act-row" href="clicker-bar.html"><img class="act-row-thumb" src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=120&h=120&fit=crop&auto=format" alt=""><span class="act-row-name">Clicker Bar</span><span class="act-row-arrow">BEKIJK →</span></a>
+      <a class="act-row" href="live-hot-press-canvas.html"><img class="act-row-thumb" src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=120&h=120&fit=crop&auto=format" alt=""><span class="act-row-name">Live Hot Press Canvas</span><span class="act-row-arrow">BEKIJK →</span></a>
+    </div>
+  </div>
+  <div class="footer-nav">
+    <div class="footer-address">Amsterdam, Nederland<br><br>hallo@happyhourevents.nl</div>
+    <div class="footer-links-col"><h6>Activations</h6><a href="live-monogramming.html">Live Monogramming</a><a href="perfume-bar.html">Perfume Bar</a><a href="clicker-bar.html">Clicker Bar</a><a href="live-hot-press-canvas.html">Live Hot Press Canvas</a></div>
+    <div class="footer-links-col"><h6>Bedrijf</h6><a href="catalogue.html">Catalogus</a><a href="index.html#welcome">Private Events</a><a href="index.html#welcome">Corporate Events</a><a href="index.html#faq">FAQ</a></div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Happy Hour Events</span>
+    <div class="footer-social"><a href="#">Instagram</a><a href="#">LinkedIn</a><a href="#">TikTok</a></div>
+  </div>
+</footer>
+
+<script>
+  function toggleFaq(el) {
+    const item = el.closest('.faq-item'), wasOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!wasOpen) item.classList.add('open');
+  }
+  function toggleDrawer() { document.getElementById('drawer').classList.toggle('open'); }
+  function closeDrawer()  { document.getElementById('drawer').classList.remove('open'); }
+</script>
+</body>
+</html>

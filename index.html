@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Hour Events — Live Activations voor Private & Corporate Events</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="shared.css">
+  <style>
+    /* HERO */
+    #hero { position: relative; height: 100vh; overflow: hidden; }
+    .hero-slide { position: absolute; inset: 0; background-size: cover; background-position: center; opacity: 0; transition: opacity 1.5s ease; }
+    .hero-slide.active { opacity: 1; }
+    .hero-slide::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(255,255,255,0.24) 0%, rgba(255,255,255,0.03) 22%, rgba(255,255,255,0.03) 65%, rgba(255,255,255,0.42) 100%); }
+    .hero-inner { position: absolute; inset: 0; display: flex; flex-direction: column; padding: 80px 48px 48px; }
+    .hero-title-wrap { flex: 1; display: flex; align-items: center; justify-content: center; }
+    .hero-h1 { font-size: clamp(76px, 13.5vw, 196px); line-height: 0.87; text-transform: uppercase; text-align: center; letter-spacing: -0.01em; }
+    .hero-3col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 40px; }
+    .hero-3col p { font-size: 10px; line-height: 1.72; letter-spacing: 0.06em; text-transform: uppercase; }
+    .hero-3col p:nth-child(2) { text-align: center; }
+    .hero-3col p:nth-child(3) { text-align: right; }
+    /* ACTIVATIONS — now first */
+    #activations { background: var(--white); padding: 96px 0 0; }
+    .act-heading { padding: 0 48px 12px; text-align: center; }
+    .act-sub-text { font-size: 14px; line-height: 1.75; opacity: 0.52; max-width: 540px; margin: 16px auto 36px; text-align: center; padding: 0 48px; }
+    .act-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 3px; }
+    .act-card { padding: 36px 26px 30px; display: flex; flex-direction: column; text-decoration: none; color: var(--black); }
+    .act-card:nth-child(1) { background: var(--beige1); }
+    .act-card:nth-child(2) { background: var(--beige2); }
+    .act-card:nth-child(3) { background: var(--beige3); }
+    .act-card:nth-child(4) { background: var(--beige4); }
+    .act-cat { font-size: 9.5px; letter-spacing: 0.17em; text-transform: uppercase; margin-bottom: 14px; opacity: 0.55; }
+    .act-title { font-size: clamp(22px, 2.2vw, 36px); line-height: 1.05; text-transform: uppercase; margin-bottom: 18px; }
+    .act-desc { font-size: 12.5px; line-height: 1.78; flex: 1; opacity: 0.72; }
+    .act-img { width: 55%; max-width: 180px; aspect-ratio: 1; object-fit: cover; filter: grayscale(100%) contrast(1.05); margin: 24px auto; display: block; }
+    .act-book { font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; text-decoration: none; color: var(--white); background: var(--black); display: block; text-align: center; padding: 12px 0; transition: background 0.2s; margin-top: auto; }
+    .act-book:hover { background: var(--accent); }
+    .act-note { font-size: 9.5px; letter-spacing: 0.1em; text-transform: uppercase; text-align: center; opacity: 0.5; margin-top: 10px; }
+
+    /* WELCOME — now second */
+    #welcome { background: var(--white); }
+    .welcome-top { padding: 115px 48px 34px; text-align: center; }
+    .welcome-sub { font-size: 14px; line-height: 1.75; opacity: 0.52; max-width: 520px; margin: 18px auto 0; }
+    .welcome-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3px; margin-top: 36px; }
+    .wcell { position: relative; overflow: hidden; height: 580px; cursor: pointer; }
+    .wcell img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.7s ease; }
+    .wcell:hover img { transform: scale(1.04); }
+    .wcell-label { position: absolute; bottom: 22px; left: 24px; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--white); text-shadow: 0 1px 10px rgba(0,0,0,0.65); }
+    .wcell-plus { position: absolute; bottom: 16px; right: 22px; font-size: 20px; color: var(--white); text-shadow: 0 1px 10px rgba(0,0,0,0.65); line-height: 1; }
+
+    /* FAQ */
+    #faq { padding: 100px 48px; background: var(--white); }
+    .faq-wrap { max-width: 720px; margin: 0 auto; }
+    .faq-label { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.42; text-align: center; margin-bottom: 16px; }
+    .faq-heading { font-size: clamp(36px, 5vw, 68px); text-align: center; margin-bottom: 52px; line-height: 1.05; }
+    .faq-item { border-top: 1px solid rgba(0,0,0,0.09); }
+    .faq-item:last-child { border-bottom: 1px solid rgba(0,0,0,0.09); }
+    .faq-q { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 20px 0; cursor: pointer; user-select: none; }
+    .faq-q-text { font-size: 15px; letter-spacing: 0.01em; line-height: 1.4; }
+    .faq-icon { font-size: 22px; font-weight: 300; flex-shrink: 0; width: 28px; text-align: center; transition: transform 0.3s; color: var(--accent); }
+    .faq-item.open .faq-icon { transform: rotate(45deg); }
+    .faq-a { font-size: 13.5px; line-height: 1.75; opacity: 0.58; max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding-bottom 0.3s; }
+    .faq-item.open .faq-a { max-height: 300px; padding-bottom: 20px; }
+
+    /* CTA */
+    #cta { background: var(--white); padding: 110px 48px 0; text-align: center; }
+
+    /* RESPONSIVE */
+    @media (max-width: 1024px) { .act-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 900px) {
+      .hero-inner { padding: 80px 24px 48px; }
+      .hero-h1 { font-size: clamp(56px, 16vw, 100px); }
+      .hero-3col { grid-template-columns: 1fr; }
+      .hero-3col p:nth-child(2), .hero-3col p:nth-child(3) { display: none; }
+      #activations { padding: 72px 0 0; }
+      .act-heading { padding: 0 24px 12px; }
+      .act-sub-text { padding: 0 24px; }
+      .act-grid { grid-template-columns: 1fr; }
+      .welcome-top { padding: 80px 24px 28px; }
+      .welcome-grid { grid-template-columns: 1fr; }
+      .wcell { height: 300px; }
+      #faq { padding: 72px 24px; }
+      #cta { padding: 80px 24px 0; }
+    }
+    @media (max-width: 560px) {
+      .act-grid { grid-template-columns: 1fr; }
+      .welcome-grid { grid-template-columns: 1fr; }
+      .faq-heading { font-size: clamp(30px, 9vw, 50px); }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══ PILL NAV ══ -->
+<nav id="nav">
+  <div class="nav-pill">
+    <a href="index.html"><img class="nav-logo" src="logo.png" alt="Happy Hour Events"></a>
+    <ul class="nav-links">
+      <li class="nav-dd">
+        <a href="#activations" class="nav-dd-toggle">
+          Activations <span class="nav-dd-arrow">▾</span>
+        </a>
+        <div class="nav-dd-menu">
+          <a href="live-monogramming.html">Live Monogramming</a>
+          <a href="perfume-bar.html">Perfume Bar</a>
+          <a href="clicker-bar.html">Clicker Bar</a>
+          <a href="live-hot-press-canvas.html">Live Hot Press Canvas</a>
+        </div>
+      </li>
+      <li><a href="catalogue.html">Catalogus</a></li>
+      <li><a href="#welcome">Private &amp; Corporate</a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li><a href="#cta" class="nav-book">Boek nu</a></li>
+    </ul>
+    <button class="nav-burger" onclick="toggleDrawer()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<div class="drawer" id="drawer">
+  <span class="drawer-section-label">Activations</span>
+  <a href="live-monogramming.html"    class="drawer-sub" onclick="closeDrawer()">Live Monogramming</a>
+  <a href="perfume-bar.html"          class="drawer-sub" onclick="closeDrawer()">Perfume Bar</a>
+  <a href="clicker-bar.html"          class="drawer-sub" onclick="closeDrawer()">Clicker Bar</a>
+  <a href="live-hot-press-canvas.html" class="drawer-sub" onclick="closeDrawer()">Live Hot Press Canvas</a>
+  <a href="catalogue.html"   onclick="closeDrawer()">Catalogus</a>
+  <a href="#welcome"         onclick="closeDrawer()">Private &amp; Corporate</a>
+  <a href="#faq"             onclick="closeDrawer()">FAQ</a>
+  <a href="#cta"             onclick="closeDrawer()">Boek nu</a>
+</div>
+
+<!-- ══ HERO ══ -->
+<section id="hero">
+  <div class="hero-slide active" style="background-image:url('https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1920&h=1080&fit=crop&auto=format')"></div>
+  <div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=1920&h=1080&fit=crop&auto=format')"></div>
+  <div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&h=1080&fit=crop&auto=format')"></div>
+  <div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1527529482837-4698179dc6ce?w=1920&h=1080&fit=crop&auto=format')"></div>
+  <div class="hero-inner">
+    <div class="hero-title-wrap">
+      <h1 class="hero-h1">Happy<br>Hour<br>Events.</h1>
+    </div>
+    <div class="hero-3col">
+      <p>200+ events begeleid —<br>van 25 tot 1.000+ gasten<br>door heel Nederland</p>
+      <p>Gasten die jouw event<br>maanden later nog steeds<br>gebruiken en herinneren</p>
+      <p>Zero gedoe voor jou.<br>Wij regelen alles —<br>setup tot en met afbouw.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ ACTIVATIONS (now first) ══ -->
+<section id="activations">
+  <div class="act-heading">
+    <h2 class="sec-head">Activations</h2>
+  </div>
+  <p class="act-sub-text">
+    Geen wegwerpspullen. Geen vergeetbare giveaways. Live ervaringen gecombineerd met premium producten die gasten bewaren. Dát is wat van een event een verhaal maakt.
+  </p>
+  <div class="act-grid">
+
+    <a class="act-card" href="live-monogramming.html">
+      <p class="act-cat">Live op je event</p>
+      <h3 class="act-title">Live Monogramming</h3>
+      <p class="act-desc">Initialen live geperst in echt leer. Elk stuk uniek — gemaakt terwijl je gasten toekijken. Mooier dan welk giveaway dan ook.</p>
+      <img class="act-img" src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=400&fit=crop&auto=format" alt="Live Monogramming">
+      <span class="act-book">Meer info &amp; boek →</span>
+      <p class="act-note">Alleen Full Service beschikbaar</p>
+    </a>
+
+    <a class="act-card" href="perfume-bar.html">
+      <p class="act-cat">Gasten maken het zelf</p>
+      <h3 class="act-title">Perfume Bar</h3>
+      <p class="act-desc">Gasten mengen hun eigen parfum in jouw merkflacon. De meest gesprekswaardige activation op elk event — mensen praten er maanden over.</p>
+      <img class="act-img" src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=400&h=400&fit=crop&auto=format" alt="Perfume Bar">
+      <span class="act-book">Meer info &amp; boek →</span>
+      <p class="act-note">Starter Kit of Full Service</p>
+    </a>
+
+    <a class="act-card" href="clicker-bar.html">
+      <p class="act-cat">Merch die ze écht gebruiken</p>
+      <h3 class="act-title">Clicker Bar</h3>
+      <p class="act-desc">3D-geprinte pennen met naam en logo, live gemaakt op je event. Premium kwaliteit die voelbaar is — tijdloos design, geen wegwerptrend.</p>
+      <img class="act-img" src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=400&h=400&fit=crop&auto=format" alt="Clicker Bar">
+      <span class="act-book">Meer info &amp; boek →</span>
+      <p class="act-note">Starter Kit of Full Service</p>
+    </a>
+
+    <a class="act-card" href="live-hot-press-canvas.html">
+      <p class="act-cat">Live kunst op je event</p>
+      <h3 class="act-title">Live Hot Press Canvas</h3>
+      <p class="act-desc">Kunst geperst op canvas, live voor hun ogen. Elk stuk uniek. Gasten gaan naar huis met een mini-kunstwerk dat ze jarenlang bewaren.</p>
+      <img class="act-img" src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=400&h=400&fit=crop&auto=format" alt="Live Hot Press Canvas">
+      <span class="act-book">Meer info &amp; boek →</span>
+      <p class="act-note">Starter Kit of Full Service</p>
+    </a>
+
+  </div>
+</section>
+
+<!-- ══ WELCOME / PRIVATE & CORPORATE (now second) ══ -->
+<section id="welcome">
+  <div class="welcome-top">
+    <h2 class="sec-head" style="text-align:center;">Events die mensen<br>niet vergeten.</h2>
+    <p class="welcome-sub">
+      Of het nu jouw bruiloft is of de lancering van het jaar — wij zorgen dat elke gast het gevoel heeft dat dit event speciaal voor hem gemaakt is. Persoonlijk. Premium. Onvergetelijk.
+    </p>
+  </div>
+  <div class="welcome-grid">
+    <div class="wcell">
+      <img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=900&h=900&fit=crop&auto=format" alt="Private Events">
+      <span class="wcell-label">Private Events</span>
+      <span class="wcell-plus">+</span>
+    </div>
+    <div class="wcell">
+      <img src="https://images.unsplash.com/photo-1531058020387-3be344556be6?w=900&h=900&fit=crop&auto=format" alt="Corporate Events">
+      <span class="wcell-label">Corporate Events</span>
+      <span class="wcell-plus">+</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FAQ ══ -->
+<section id="faq">
+  <div class="faq-wrap">
+    <p class="faq-label">Vraag het ons</p>
+    <h2 class="faq-heading">Alles helder.</h2>
+
+    <div class="faq-item open">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        <span class="faq-q-text">Is mijn datum nog beschikbaar?</span>
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-a">Onze agenda vult snel — zeker in Q4 en voorjaar. Populaire data raken soms 3 maanden van tevoren vol. Plan vandaag een gratis gesprek van 20 minuten om jouw datum te reserveren voordat een ander het doet.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        <span class="faq-q-text">Kunnen we meerdere activations combineren?</span>
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-a">Absoluut — en we adviseren het. Events met 2 of meer activations scoren structureel hoger op gasttevredenheid. We begeleiden je gratis in de beste combinatie voor jouw gastaantal, budget en sfeer.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        <span class="faq-q-text">Reizen jullie door heel Nederland?</span>
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-a">Ja. Amsterdam, Rotterdam, Den Haag, Utrecht en alles daartussen. Buiten Nederland? Vraag ernaar — we zijn verder dan je denkt. Reiskosten worden transparant berekend in de offerte, nooit verborgen.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        <span class="faq-q-text">Hoeveel gasten heb ik minimaal nodig?</span>
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-a">Vanaf 25 gasten. Er is geen maximum — we hebben events begeleid met meer dan 1.000 gasten. Schaal is nooit een probleem; kwaliteit is altijd onze standaard.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        <span class="faq-q-text">Hoe lang duurt een activation op het event?</span>
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-a">Gemiddeld 2–4 uur. We stemmen dit altijd nauwkeurig af op jouw programma zodat het naadloos aansluit — gasten wachten nooit te lang en missen nooit een moment.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        <span class="faq-q-text">Is alles aanpasbaar aan onze huisstijl?</span>
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-a">Alles. Kleuren, logo's, flacons, leer, verpakking, tafeldecoratie — jouw merk staat centraal in elke activatie. Stuur ons je brandguide en wij zorgen dat gasten jouw merk voelen, zien en mee naar huis nemen.</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══ CTA ══ -->
+<section id="cta">
+  <p class="cta-label">Gratis kennismakingsgesprek — 20 min</p>
+  <h2 class="cta-h2">De mooiste events<br>zijn al volgeboekt.</h2>
+  <p class="cta-sub">We werken met een beperkt aantal events per maand — zo garanderen we de kwaliteit die jij en je gasten verdienen. Bekijk of jouw datum nog vrij is.</p>
+  <a class="btn-pill" href="mailto:hallo@happyhourevents.nl">Bekijk beschikbaarheid <span>↗</span></a>
+  <div style="height: 110px;"></div>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <div class="footer-main">
+    <div>
+      <p class="footer-sub-text">Schrijf je in voor event<br>inspiratie en updates,<br>één keer per maand.</p>
+      <div class="footer-form">
+        <input type="email" placeholder="Jouw e-mailadres">
+        <button class="footer-submit" type="button">STUUR <span style="font-size:14px;">→</span></button>
+      </div>
+    </div>
+    <div class="act-rows">
+      <a class="act-row" href="live-monogramming.html">
+        <img class="act-row-thumb" src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=120&h=120&fit=crop&auto=format" alt="">
+        <span class="act-row-name">Live Monogramming</span>
+        <span class="act-row-arrow">BEKIJK →</span>
+      </a>
+      <a class="act-row" href="perfume-bar.html">
+        <img class="act-row-thumb" src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=120&h=120&fit=crop&auto=format" alt="">
+        <span class="act-row-name">Perfume Bar</span>
+        <span class="act-row-arrow">BEKIJK →</span>
+      </a>
+      <a class="act-row" href="clicker-bar.html">
+        <img class="act-row-thumb" src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=120&h=120&fit=crop&auto=format" alt="">
+        <span class="act-row-name">Clicker Bar</span>
+        <span class="act-row-arrow">BEKIJK →</span>
+      </a>
+      <a class="act-row" href="live-hot-press-canvas.html">
+        <img class="act-row-thumb" src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=120&h=120&fit=crop&auto=format" alt="">
+        <span class="act-row-name">Live Hot Press Canvas</span>
+        <span class="act-row-arrow">BEKIJK →</span>
+      </a>
+    </div>
+  </div>
+  <div class="footer-nav">
+    <div class="footer-address">Amsterdam,<br>Nederland<br><br>hallo@happyhourevents.nl</div>
+    <div class="footer-links-col">
+      <h6>Activations</h6>
+      <a href="live-monogramming.html">Live Monogramming</a>
+      <a href="perfume-bar.html">Perfume Bar</a>
+      <a href="clicker-bar.html">Clicker Bar</a>
+      <a href="live-hot-press-canvas.html">Live Hot Press Canvas</a>
+    </div>
+    <div class="footer-links-col">
+      <h6>Bedrijf</h6>
+      <a href="catalogue.html">Catalogus</a>
+      <a href="#welcome">Private Events</a>
+      <a href="#welcome">Corporate Events</a>
+      <a href="#faq">FAQ</a>
+      <a href="#cta">Contact</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Happy Hour Events</span>
+    <div class="footer-social">
+      <a href="#">Instagram</a>
+      <a href="#">LinkedIn</a>
+      <a href="#">TikTok</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const slides = document.querySelectorAll('.hero-slide');
+  let current  = 0;
+  function goToSlide(n) {
+    slides[current].classList.remove('active');
+    current = (n + slides.length) % slides.length;
+    slides[current].classList.add('active');
+  }
+  setInterval(() => goToSlide(current + 1), 5000);
+
+  function toggleFaq(el) {
+    const item = el.closest('.faq-item');
+    const wasOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!wasOpen) item.classList.add('open');
+  }
+
+  function toggleDrawer() { document.getElementById('drawer').classList.toggle('open'); }
+  function closeDrawer()  { document.getElementById('drawer').classList.remove('open'); }
+</script>
+</body>
+</html>
