@@ -10,40 +10,36 @@
   <style>
     .page-hero { padding: 160px 48px 72px; text-align: center; background: var(--beige4); }
     .page-hero-eyebrow { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.4; margin-bottom: 22px; }
-    .page-hero-h1 { font-size: clamp(60px, 10vw, 140px); text-transform: uppercase; line-height: 0.88; letter-spacing: -0.02em; margin-bottom: 28px; }
+    .page-hero-h1 { font-size: clamp(51px, 8.5vw, 119px); text-transform: uppercase; line-height: 0.88; letter-spacing: -0.02em; margin-bottom: 28px; }
     .page-hero-sub { font-size: 17px; line-height: 1.7; opacity: 0.6; max-width: 500px; margin: 0 auto 56px; }
     .page-hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3px; }
     .page-hero-grid img { width: 100%; height: 520px; object-fit: cover; display: block; }
 
-    #pricing { padding: 88px 48px; background: var(--white); }
+    #pricing { padding: 88px 48px; background: var(--grey); }
     .pricing-label { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.4; text-align: center; margin-bottom: 14px; }
     .pricing-title { font-size: clamp(36px, 5vw, 72px); text-transform: uppercase; text-align: center; line-height: 1; margin-bottom: 56px; }
     .pricing-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3px; }
-    .pricing-card { background: var(--grey); padding: 40px 36px; }
-    .pricing-card.featured { background: var(--black); color: var(--white); }
+    .pricing-card { background: var(--white); padding: 40px 36px; }
+    .pricing-card.featured { background: var(--beige1); border-top: 3px solid var(--accent); }
     .pricing-badge { display: inline-block; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; background: var(--accent); color: var(--white); padding: 5px 14px; border-radius: 100px; margin-bottom: 20px; }
-    .pricing-badge-alt { background: rgba(255,255,255,0.15); }
+    .pricing-badge-dark { background: var(--black); }
     .pricing-name { font-size: clamp(24px, 3vw, 38px); text-transform: uppercase; line-height: 1; margin-bottom: 6px; }
     .pricing-tagline { font-size: 13.5px; opacity: 0.5; margin-bottom: 28px; }
-    .pricing-card.featured .pricing-tagline { opacity: 0.55; }
     .pricing-list { list-style: none; margin-bottom: 32px; }
-    .pricing-list li { font-size: 13px; line-height: 1.55; padding: 8px 0; border-bottom: 1px solid rgba(0,0,0,0.07); opacity: 0.75; display: flex; gap: 10px; align-items: flex-start; }
-    .pricing-card.featured .pricing-list li { border-bottom-color: rgba(255,255,255,0.1); opacity: 0.82; }
+    .pricing-list li { font-size: 13px; line-height: 1.55; padding: 8px 0; border-bottom: 1px solid rgba(0,0,0,0.07); opacity: 0.72; display: flex; gap: 10px; align-items: flex-start; }
     .pricing-list li::before { content: '✓'; color: var(--accent); flex-shrink: 0; }
     .pricing-note { font-size: 11px; opacity: 0.38; letter-spacing: 0.04em; margin-top: 14px; }
-    .btn-pill-white { background: var(--white); color: var(--black); }
-    .btn-pill-white:hover { background: var(--accent); color: var(--white); }
 
-    #how { padding: 88px 48px; background: var(--grey); }
+    #how { padding: 88px 48px; background: var(--white); }
     .how-label { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.4; text-align: center; margin-bottom: 14px; }
     .how-title { font-size: clamp(36px, 5vw, 72px); text-transform: uppercase; text-align: center; line-height: 1; margin-bottom: 56px; }
     .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3px; }
-    .step { padding: 36px 28px; background: var(--white); }
+    .step { padding: 36px 28px; background: var(--grey); }
     .step-num { font-size: clamp(48px, 5vw, 72px); opacity: 0.08; line-height: 1; margin-bottom: 18px; }
     .step-title { font-size: 15px; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 10px; }
     .step-text { font-size: 13px; line-height: 1.72; opacity: 0.55; }
 
-    #faq { padding: 88px 48px; background: var(--white); }
+    #faq { padding: 88px 48px; background: var(--grey); }
     .faq-wrap { max-width: 720px; margin: 0 auto; }
     .faq-label { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.4; text-align: center; margin-bottom: 14px; }
     .faq-heading { font-size: clamp(36px, 5vw, 64px); text-transform: uppercase; text-align: center; margin-bottom: 52px; line-height: 1; }
@@ -84,7 +80,7 @@
       <li><a href="catalogue.html">Catalogus</a></li>
       <li><a href="index.html#welcome">Private &amp; Corporate</a></li>
       <li><a href="#faq">FAQ</a></li>
-      <li><a href="#cta" class="nav-book">Boek nu</a></li>
+      <li><a href="boek.html" class="nav-book">Boek nu</a></li>
     </ul>
     <button class="nav-burger" onclick="toggleDrawer()" aria-label="Menu"><span></span><span></span><span></span></button>
   </div>
@@ -98,10 +94,9 @@
   <a href="live-hot-press-canvas.html" class="drawer-sub" onclick="closeDrawer()">Live Hot Press Canvas</a>
   <a href="catalogue.html"    onclick="closeDrawer()">Catalogus</a>
   <a href="index.html#welcome" onclick="closeDrawer()">Private &amp; Corporate</a>
-  <a href="#cta"              onclick="closeDrawer()">Boek nu</a>
+  <a href="boek.html"         onclick="closeDrawer()">Boek nu</a>
 </div>
 
-<!-- HERO -->
 <section class="page-hero">
   <p class="page-hero-eyebrow">Activation 04</p>
   <h1 class="page-hero-h1">Hot Press<br>Canvas</h1>
@@ -112,12 +107,10 @@
   </div>
 </section>
 
-<!-- PRICING -->
 <section id="pricing">
   <p class="pricing-label">Kies jouw aanpak</p>
   <h2 class="pricing-title">Pakketten</h2>
   <div class="pricing-grid">
-
     <div class="pricing-card">
       <span class="pricing-badge">Starter Kit</span>
       <h3 class="pricing-name">DIY</h3>
@@ -129,12 +122,11 @@
         <li>Branded verpakking inbegrepen</li>
         <li>Retour na het event</li>
       </ul>
-      <a class="btn-pill" href="mailto:hallo@happyhourevents.nl?subject=Offerte Hot Press Canvas - Starter Kit">Vraag offerte aan ↗</a>
+      <a class="btn-pill" href="boek.html">Vraag offerte aan ↗</a>
       <p class="pricing-note">Prijs op aanvraag · min. 25 gasten</p>
     </div>
-
     <div class="pricing-card featured">
-      <span class="pricing-badge pricing-badge-alt">Full Service</span>
+      <span class="pricing-badge pricing-badge-dark">Full Service</span>
       <h3 class="pricing-name">Alles geregeld</h3>
       <p class="pricing-tagline">Wij komen, wij doen, wij ruimen op.</p>
       <ul class="pricing-list">
@@ -144,14 +136,12 @@
         <li>Canvas, press &amp; branded verpakking</li>
         <li>2–5 uur · 20–400+ gasten</li>
       </ul>
-      <a class="btn-pill btn-pill-white" href="mailto:hallo@happyhourevents.nl?subject=Offerte Hot Press Canvas - Full Service">Vraag offerte aan ↗</a>
+      <a class="btn-pill" href="boek.html">Vraag offerte aan ↗</a>
       <p class="pricing-note">Prijs op aanvraag · geen verborgen kosten</p>
     </div>
-
   </div>
 </section>
 
-<!-- HOW IT WORKS -->
 <section id="how">
   <p class="how-label">Het proces</p>
   <h2 class="how-title">Hoe het werkt</h2>
@@ -174,49 +164,34 @@
   </div>
 </section>
 
-<!-- FAQ -->
 <section id="faq">
   <div class="faq-wrap">
     <p class="faq-label">Veelgestelde vragen</p>
     <h2 class="faq-heading">Alles helder.</h2>
-
     <div class="faq-item open">
-      <div class="faq-q" onclick="toggleFaq(this)">
-        <span class="faq-q-text">Welke motieven zijn beschikbaar?</span>
-        <span class="faq-icon">+</span>
-      </div>
+      <div class="faq-q" onclick="toggleFaq(this)"><span class="faq-q-text">Welke motieven zijn beschikbaar?</span><span class="faq-icon">+</span></div>
       <div class="faq-a">Bloemen, geometrische vormen, teksten en abstracte patronen. Voor Full Service ontwerpen we ook exclusieve motieven op basis van jouw huisstijl of eventthema.</div>
     </div>
     <div class="faq-item">
-      <div class="faq-q" onclick="toggleFaq(this)">
-        <span class="faq-q-text">In welk canvas-formaat werken jullie?</span>
-        <span class="faq-icon">+</span>
-      </div>
+      <div class="faq-q" onclick="toggleFaq(this)"><span class="faq-q-text">In welk canvas-formaat werken jullie?</span><span class="faq-icon">+</span></div>
       <div class="faq-a">A5 (postcard-formaat), A4 en A3. Klein voor in de tas, groter voor aan de muur. We adviseren vooraf welk formaat past bij jouw event.</div>
     </div>
     <div class="faq-item">
-      <div class="faq-q" onclick="toggleFaq(this)">
-        <span class="faq-q-text">Is het veilig voor alle leeftijden?</span>
-        <span class="faq-icon">+</span>
-      </div>
-      <div class="faq-a">Ja. Geen open vlam, geen rook. De press werkt met gecontroleerde hitte op het motief-oppervlak. Gasten van alle leeftijden kunnen deelnemen (kinderen met begeleiding).</div>
+      <div class="faq-q" onclick="toggleFaq(this)"><span class="faq-q-text">Is het veilig voor alle leeftijden?</span><span class="faq-icon">+</span></div>
+      <div class="faq-a">Ja. Geen open vlam, geen rook. De press werkt met gecontroleerde hitte op het motief-oppervlak. Gasten van alle leeftijden kunnen deelnemen.</div>
     </div>
     <div class="faq-item">
-      <div class="faq-q" onclick="toggleFaq(this)">
-        <span class="faq-q-text">Hoe lang duurt het per gast?</span>
-        <span class="faq-icon">+</span>
-      </div>
+      <div class="faq-q" onclick="toggleFaq(this)"><span class="faq-q-text">Hoe lang duurt het per gast?</span><span class="faq-icon">+</span></div>
       <div class="faq-a">Het persen zelf duurt 30–60 seconden. Met motief-keuze en afkoelen zit je op 3–5 minuten per gast. Bij grotere events plaatsen we meerdere presses.</div>
     </div>
   </div>
 </section>
 
-<!-- CTA -->
 <section id="cta" class="cta-section">
   <p class="cta-label">Gratis gesprek · 20 min · geen verplichtingen</p>
   <h2 class="cta-h2">Het enige cadeau<br>dat gasten ophangen.<br>Niet weggooien.</h2>
   <p class="cta-sub">Dat is het verschil tussen een leuk event en een onvergetelijk event. Check of jouw datum nog vrij is.</p>
-  <a class="btn-pill" href="mailto:hallo@happyhourevents.nl?subject=Offerte Hot Press Canvas">Check beschikbaarheid ↗</a>
+  <a class="btn-pill" href="boek.html">Check beschikbaarheid ↗</a>
   <div style="height: 110px;"></div>
 </section>
 

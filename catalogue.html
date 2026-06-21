@@ -9,11 +9,11 @@
   <link rel="stylesheet" href="shared.css">
   <style>
     /* HERO */
-    .cat-hero { padding: 160px 48px 72px; background: var(--beige1); }
+    .cat-hero { padding: 160px 48px 72px; background: var(--beige1); text-align: center; }
     .cat-hero-eyebrow { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.45; margin-bottom: 20px; }
     .cat-hero-h1 { font-size: clamp(52px, 8vw, 120px); text-transform: uppercase; line-height: 0.92; letter-spacing: -0.01em; margin-bottom: 28px; }
-    .cat-hero-sub { font-size: 17px; line-height: 1.72; opacity: 0.62; max-width: 560px; }
-    .cat-meta { display: flex; gap: 32px; margin-top: 40px; flex-wrap: wrap; }
+    .cat-hero-sub { font-size: 17px; line-height: 1.72; opacity: 0.62; max-width: 560px; margin: 0 auto; }
+    .cat-meta { display: flex; gap: 32px; margin-top: 40px; flex-wrap: wrap; justify-content: center; }
     .cat-meta-item { font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.5; }
     .cat-meta-item span { display: block; font-size: 16px; opacity: 1; color: var(--black); margin-top: 6px; letter-spacing: 0.01em; text-transform: none; }
 
@@ -89,7 +89,7 @@
       <li><a href="catalogue.html">Catalogus</a></li>
       <li><a href="index.html#welcome">Private &amp; Corporate</a></li>
       <li><a href="index.html#faq">FAQ</a></li>
-      <li><a href="mailto:hallo@happyhourevents.nl" class="nav-book">Boek nu</a></li>
+      <li><a href="boek.html" class="nav-book">Boek nu</a></li>
     </ul>
     <button class="nav-burger" onclick="toggleDrawer()" aria-label="Menu"><span></span><span></span><span></span></button>
   </div>
@@ -103,7 +103,7 @@
   <a href="live-hot-press-canvas.html" class="drawer-sub" onclick="closeDrawer()">Live Hot Press Canvas</a>
   <a href="catalogue.html"   onclick="closeDrawer()">Catalogus</a>
   <a href="index.html#welcome" onclick="closeDrawer()">Private &amp; Corporate</a>
-  <a href="mailto:hallo@happyhourevents.nl" onclick="closeDrawer()">Boek nu</a>
+  <a href="boek.html"                       onclick="closeDrawer()">Boek nu</a>
 </div>
 
 <!-- HERO -->
