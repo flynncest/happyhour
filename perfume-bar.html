@@ -8,67 +8,61 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="shared.css">
   <style>
-    .page-hero { padding: 160px 48px 80px; background: var(--beige2); }
-    .page-hero-eyebrow { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.45; margin-bottom: 20px; }
-    .page-hero-h1 { font-size: clamp(52px, 8vw, 120px); text-transform: uppercase; line-height: 0.92; letter-spacing: -0.01em; margin-bottom: 28px; }
-    .page-hero-sub { font-size: 17px; line-height: 1.72; opacity: 0.62; max-width: 480px; }
-    .page-hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3px; margin-top: 64px; }
-    .page-hero-grid img { width: 100%; height: 480px; object-fit: cover; display: block; }
-    .section { padding: 88px 48px; }
-    .benefits-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 3px; margin-top: 48px; }
-    .benefit { background: var(--grey); padding: 32px 24px; }
-    .benefit-num { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; opacity: 0.38; margin-bottom: 14px; }
-    .benefit-title { font-size: 15px; line-height: 1.3; margin-bottom: 10px; }
-    .benefit-text { font-size: 13px; line-height: 1.72; opacity: 0.6; }
-    .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3px; margin-top: 48px; }
-    .step { padding: 36px 28px; border: 1px solid rgba(0,0,0,0.08); }
-    .step-num { font-size: clamp(40px, 5vw, 64px); opacity: 0.1; line-height: 1; margin-bottom: 16px; }
-    .step-title { font-size: 16px; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 12px; }
-    .step-text { font-size: 13px; line-height: 1.72; opacity: 0.6; }
+    .page-hero { padding: 160px 48px 72px; text-align: center; background: var(--beige2); }
+    .page-hero-eyebrow { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.4; margin-bottom: 22px; }
+    .page-hero-h1 { font-size: clamp(60px, 10vw, 140px); text-transform: uppercase; line-height: 0.88; letter-spacing: -0.02em; margin-bottom: 28px; }
+    .page-hero-sub { font-size: 17px; line-height: 1.7; opacity: 0.6; max-width: 500px; margin: 0 auto 56px; }
+    .page-hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3px; }
+    .page-hero-grid img { width: 100%; height: 520px; object-fit: cover; display: block; }
 
-    /* PRICING GRID */
-    #pricing { background: var(--grey); padding: 88px 48px; }
-    .pricing-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3px; margin-top: 48px; }
-    .pricing-card { background: var(--white); padding: 40px 36px; }
+    #pricing { padding: 88px 48px; background: var(--white); }
+    .pricing-label { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.4; text-align: center; margin-bottom: 14px; }
+    .pricing-title { font-size: clamp(36px, 5vw, 72px); text-transform: uppercase; text-align: center; line-height: 1; margin-bottom: 56px; }
+    .pricing-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3px; }
+    .pricing-card { background: var(--grey); padding: 40px 36px; }
     .pricing-card.featured { background: var(--black); color: var(--white); }
-    .pricing-badge { display: inline-block; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; background: var(--accent); color: var(--white); padding: 5px 14px; border-radius: 100px; margin-bottom: 22px; }
-    .pricing-badge-outline { background: rgba(255,255,255,0.15); }
-    .pricing-name { font-size: clamp(24px, 3.5vw, 42px); text-transform: uppercase; line-height: 1; margin-bottom: 8px; }
-    .pricing-tagline { font-size: 14px; opacity: 0.55; margin-bottom: 28px; }
-    .pricing-card.featured .pricing-tagline { opacity: 0.6; }
+    .pricing-badge { display: inline-block; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; background: var(--accent); color: var(--white); padding: 5px 14px; border-radius: 100px; margin-bottom: 20px; }
+    .pricing-badge-alt { background: rgba(255,255,255,0.15); }
+    .pricing-name { font-size: clamp(24px, 3vw, 38px); text-transform: uppercase; line-height: 1; margin-bottom: 6px; }
+    .pricing-tagline { font-size: 13.5px; opacity: 0.5; margin-bottom: 28px; }
+    .pricing-card.featured .pricing-tagline { opacity: 0.55; }
     .pricing-list { list-style: none; margin-bottom: 32px; }
-    .pricing-list li { font-size: 13px; line-height: 1.6; padding: 8px 0; border-bottom: 1px solid rgba(0,0,0,0.07); opacity: 0.75; display: flex; gap: 10px; align-items: flex-start; }
-    .pricing-card.featured .pricing-list li { border-bottom-color: rgba(255,255,255,0.1); opacity: 0.8; }
+    .pricing-list li { font-size: 13px; line-height: 1.55; padding: 8px 0; border-bottom: 1px solid rgba(0,0,0,0.07); opacity: 0.75; display: flex; gap: 10px; align-items: flex-start; }
+    .pricing-card.featured .pricing-list li { border-bottom-color: rgba(255,255,255,0.1); opacity: 0.82; }
     .pricing-list li::before { content: '✓'; color: var(--accent); flex-shrink: 0; }
-    .pricing-note { font-size: 11px; opacity: 0.4; letter-spacing: 0.06em; margin-top: 16px; }
-    .pricing-card.featured .pricing-note { opacity: 0.45; }
+    .pricing-note { font-size: 11px; opacity: 0.38; letter-spacing: 0.04em; margin-top: 14px; }
     .btn-pill-white { background: var(--white); color: var(--black); }
     .btn-pill-white:hover { background: var(--accent); color: var(--white); }
 
-    #faq { background: var(--white); padding: 88px 48px; }
+    #how { padding: 88px 48px; background: var(--grey); }
+    .how-label { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.4; text-align: center; margin-bottom: 14px; }
+    .how-title { font-size: clamp(36px, 5vw, 72px); text-transform: uppercase; text-align: center; line-height: 1; margin-bottom: 56px; }
+    .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3px; }
+    .step { padding: 36px 28px; background: var(--white); }
+    .step-num { font-size: clamp(48px, 5vw, 72px); opacity: 0.08; line-height: 1; margin-bottom: 18px; }
+    .step-title { font-size: 15px; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 10px; }
+    .step-text { font-size: 13px; line-height: 1.72; opacity: 0.55; }
+
+    #faq { padding: 88px 48px; background: var(--white); }
     .faq-wrap { max-width: 720px; margin: 0 auto; }
-    .faq-label { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.42; text-align: center; margin-bottom: 16px; }
-    .faq-heading { font-size: clamp(32px, 4.5vw, 56px); text-align: center; margin-bottom: 48px; }
+    .faq-label { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.4; text-align: center; margin-bottom: 14px; }
+    .faq-heading { font-size: clamp(36px, 5vw, 64px); text-transform: uppercase; text-align: center; margin-bottom: 52px; line-height: 1; }
     .faq-item { border-top: 1px solid rgba(0,0,0,0.09); }
     .faq-item:last-child { border-bottom: 1px solid rgba(0,0,0,0.09); }
     .faq-q { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 20px 0; cursor: pointer; user-select: none; }
     .faq-q-text { font-size: 15px; line-height: 1.4; }
-    .faq-icon { font-size: 22px; font-weight: 300; flex-shrink: 0; width: 28px; text-align: center; transition: transform 0.3s; color: var(--accent); }
+    .faq-icon { font-size: 22px; flex-shrink: 0; width: 28px; text-align: center; transition: transform 0.3s; color: var(--accent); }
     .faq-item.open .faq-icon { transform: rotate(45deg); }
-    .faq-a { font-size: 13.5px; line-height: 1.75; opacity: 0.58; max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding-bottom 0.3s; }
+    .faq-a { font-size: 13.5px; line-height: 1.75; opacity: 0.55; max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding-bottom 0.3s; }
     .faq-item.open .faq-a { max-height: 300px; padding-bottom: 20px; }
 
     @media (max-width: 900px) {
-      .page-hero { padding: 130px 24px 60px; }
+      .page-hero { padding: 130px 24px 56px; }
       .page-hero-grid { grid-template-columns: 1fr; }
-      .page-hero-grid img { height: 260px; }
-      .section, #pricing, #faq { padding: 64px 24px; }
-      .benefits-grid { grid-template-columns: 1fr 1fr; }
-      .steps { grid-template-columns: 1fr; }
+      .page-hero-grid img { height: 280px; }
+      #pricing, #how, #faq { padding: 64px 24px; }
       .pricing-grid { grid-template-columns: 1fr; }
-    }
-    @media (max-width: 560px) {
-      .benefits-grid { grid-template-columns: 1fr; }
+      .steps { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -98,114 +92,85 @@
 
 <div class="drawer" id="drawer">
   <span class="drawer-section-label">Activations</span>
-  <a href="live-monogramming.html"    class="drawer-sub" onclick="closeDrawer()">Live Monogramming</a>
-  <a href="perfume-bar.html"          class="drawer-sub" onclick="closeDrawer()">Perfume Bar</a>
-  <a href="clicker-bar.html"          class="drawer-sub" onclick="closeDrawer()">Clicker Bar</a>
+  <a href="live-monogramming.html"     class="drawer-sub" onclick="closeDrawer()">Live Monogramming</a>
+  <a href="perfume-bar.html"           class="drawer-sub" onclick="closeDrawer()">Perfume Bar</a>
+  <a href="clicker-bar.html"           class="drawer-sub" onclick="closeDrawer()">Clicker Bar</a>
   <a href="live-hot-press-canvas.html" class="drawer-sub" onclick="closeDrawer()">Live Hot Press Canvas</a>
-  <a href="catalogue.html"   onclick="closeDrawer()">Catalogus</a>
+  <a href="catalogue.html"    onclick="closeDrawer()">Catalogus</a>
   <a href="index.html#welcome" onclick="closeDrawer()">Private &amp; Corporate</a>
-  <a href="#cta"             onclick="closeDrawer()">Boek nu</a>
+  <a href="#cta"              onclick="closeDrawer()">Boek nu</a>
 </div>
 
 <!-- HERO -->
 <section class="page-hero">
-  <p class="page-hero-eyebrow">Activation 02 — Live op je event</p>
+  <p class="page-hero-eyebrow">Activation 02</p>
   <h1 class="page-hero-h1">Perfume<br>Bar</h1>
-  <p class="page-hero-sub">Jouw gasten mixen hun eigen unieke geur — live, in een gebrandmerkte parfumflacon. Niet één cadeau voor iedereen, maar één dat echt van hén is. Dat onthoudt niemand vergeet.</p>
+  <p class="page-hero-sub">Ze mixen het zelf. Ze ruiken het de hele avond. Ze denken er nog jaren aan terug.</p>
   <div class="page-hero-grid">
     <img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=900&h=700&fit=crop&auto=format" alt="Perfume Bar">
     <img src="https://images.unsplash.com/photo-1547887537-6158d64c35b3?w=900&h=700&fit=crop&auto=format" alt="Parfum mengen">
   </div>
 </section>
 
-<!-- BENEFITS -->
-<section class="section">
-  <h2 class="sec-head" style="text-align:center;">Waarom een<br>Perfume Bar?</h2>
-  <div class="benefits-grid">
-    <div class="benefit">
-      <p class="benefit-num">01</p>
-      <p class="benefit-title">Zintuiglijk & onvergetelijk</p>
-      <p class="benefit-text">Geur is de sterkste herinnering die er bestaat. Elke keer dat jouw gast dit parfum draagt, denkt ze aan jouw event.</p>
-    </div>
-    <div class="benefit">
-      <p class="benefit-num">02</p>
-      <p class="benefit-title">Volledig gepersonaliseerd</p>
-      <p class="benefit-text">Gasten kiezen zelf welke geurelementen ze combineren. Het resultaat is 100% van hen — en dat voelen ze ook.</p>
-    </div>
-    <div class="benefit">
-      <p class="benefit-num">03</p>
-      <p class="benefit-title">Jouw merk, elk detail</p>
-      <p class="benefit-text">Flacon, label, doosje, geurnoten — alles in jouw huisstijl. Eén visueel coherent cadeau dat premium voelt en er ook zo uitziet.</p>
-    </div>
-    <div class="benefit">
-      <p class="benefit-num">04</p>
-      <p class="benefit-title">Gespreksstarter</p>
-      <p class="benefit-text">De bar trekt nieuwsgierige gasten aan. Ze helpen elkaar, ruiken, proberen — organische interactie die de sfeer op je event verheft.</p>
-    </div>
-  </div>
-</section>
-
-<!-- HOW IT WORKS -->
-<section class="section" style="background: var(--white);">
-  <h2 class="sec-head" style="text-align:center;">Hoe het werkt</h2>
-  <div class="steps">
-    <div class="step">
-      <div class="step-num">01</div>
-      <p class="step-title">Kies jouw geurnoten</p>
-      <p class="step-text">Bij de parfumbar liggen meerdere geurnoten klaar — floraal, houtachtig, fris, oosters. Elke gast kiest 2–3 noten die bij hen passen.</p>
-    </div>
-    <div class="step">
-      <div class="step-num">02</div>
-      <p class="step-title">Live gemengd</p>
-      <p class="step-text">De geurnoten worden ter plekke gecombineerd in een glazen flacon. Onze begeleider helpt de gasten de perfecte balans te vinden.</p>
-    </div>
-    <div class="step">
-      <div class="step-num">03</div>
-      <p class="step-title">Branded cadeau mee naar huis</p>
-      <p class="step-text">De flacon wordt voorzien van jouw gepersonaliseerde label en verpakking. Een premium cadeau dat gasten echt bijhoudt.</p>
-    </div>
-  </div>
-</section>
-
 <!-- PRICING -->
 <section id="pricing">
-  <h2 class="sec-head" style="text-align:center;">Kies jouw pakket</h2>
+  <p class="pricing-label">Kies jouw aanpak</p>
+  <h2 class="pricing-title">Pakketten</h2>
   <div class="pricing-grid">
 
     <div class="pricing-card">
       <span class="pricing-badge">Starter Kit</span>
-      <h3 class="pricing-name">DIY Pakket</h3>
-      <p class="pricing-tagline">Wij sturen alles. Jij organiseert zelf.</p>
+      <h3 class="pricing-name">DIY</h3>
+      <p class="pricing-tagline">Wij sturen. Jij runt het zelf.</p>
       <ul class="pricing-list">
-        <li>Gepersonaliseerd pakket op maat van jouw event</li>
-        <li>Parfumflacons in jouw stijl en kleur</li>
-        <li>Voorgemengde geurnoten, klaar voor gebruik</li>
-        <li>Instructiekaarten voor gasten</li>
-        <li>Branded labels en verpakking</li>
-        <li>Stuur materialen retour na het event</li>
-        <li>Geen begeleider — jij runt de bar zelf</li>
+        <li>Alles opgestuurd vóór het event</li>
+        <li>Flacons &amp; geurnoten in jouw huisstijl</li>
+        <li>Instructies inbegrepen</li>
+        <li>Retour na het event</li>
+        <li>Ideaal voor intieme events</li>
       </ul>
       <a class="btn-pill" href="mailto:hallo@happyhourevents.nl?subject=Offerte Perfume Bar - Starter Kit">Vraag offerte aan ↗</a>
-      <p class="pricing-note">Prijs op aanvraag. Niet beschikbaar voor kleinere budgets zonder minimum gastenaantal.</p>
+      <p class="pricing-note">Prijs op aanvraag · min. 25 gasten</p>
     </div>
 
     <div class="pricing-card featured">
-      <span class="pricing-badge pricing-badge-outline">Full Service</span>
-      <h3 class="pricing-name">Volledige Begeleiding</h3>
-      <p class="pricing-tagline">Wij regelen alles, van setup tot afbouw.</p>
+      <span class="pricing-badge pricing-badge-alt">Full Service</span>
+      <h3 class="pricing-name">Alles geregeld</h3>
+      <p class="pricing-tagline">Wij komen, wij doen, wij ruimen op.</p>
       <ul class="pricing-list">
-        <li>Getrainde parfumconsulent aanwezig op het event</li>
-        <li>Professionele inrichting van de parfumbar</li>
+        <li>Parfumconsulent aanwezig op locatie</li>
         <li>Volledige setup én afbouw door ons team</li>
-        <li>Alle materialen, flacons en branded verpakking</li>
-        <li>Persoonlijke begeleiding van elke gast</li>
-        <li>Geschikt voor 25 tot 500+ gasten</li>
-        <li>Flexibele duur: 2 tot 5 uur</li>
+        <li>Persoonlijke begeleiding per gast</li>
+        <li>Alle materialen &amp; branded verpakking</li>
+        <li>2–5 uur · 25–500+ gasten</li>
       </ul>
       <a class="btn-pill btn-pill-white" href="mailto:hallo@happyhourevents.nl?subject=Offerte Perfume Bar - Full Service">Vraag offerte aan ↗</a>
-      <p class="pricing-note">Prijs op aanvraag — afhankelijk van gastaantal, duur en maatwerk.</p>
+      <p class="pricing-note">Prijs op aanvraag · geen verborgen kosten</p>
     </div>
 
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how">
+  <p class="how-label">Het proces</p>
+  <h2 class="how-title">Hoe het werkt</h2>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">01</div>
+      <p class="step-title">Kies geurnoten</p>
+      <p class="step-text">Floraal, houtachtig, fris of oosters — elke gast kiest 2–3 noten die bij hen passen.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <p class="step-title">Live gemengd</p>
+      <p class="step-text">De geurnoten worden ter plekke gecombineerd in een glazen flacon. Resultaat: een geur die alleen van hén is.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">03</div>
+      <p class="step-title">Branded cadeau mee</p>
+      <p class="step-text">Voorzien van jouw label en verpakking. Premium cadeau — geen wegwerpkwaliteit.</p>
+    </div>
   </div>
 </section>
 
@@ -213,57 +178,45 @@
 <section id="faq">
   <div class="faq-wrap">
     <p class="faq-label">Veelgestelde vragen</p>
-    <h2 class="faq-heading">Over de Perfume Bar</h2>
+    <h2 class="faq-heading">Alles helder.</h2>
 
     <div class="faq-item open">
       <div class="faq-q" onclick="toggleFaq(this)">
         <span class="faq-q-text">Welke geurnoten zijn beschikbaar?</span>
         <span class="faq-icon">+</span>
       </div>
-      <div class="faq-a">We werken met een breed palet: floraal (roos, jasmijn), houtachtig (sandelhout, ceder), fris (bergamot, citrus) en oosters (musk, amber, vanille). Samen kiezen we een selectie die past bij de sfeer van jouw event.</div>
+      <div class="faq-a">Floraal (roos, jasmijn), houtachtig (sandelhout, ceder), fris (bergamot, citrus) en oosters (musk, amber, vanille). We stemmen de selectie af op de sfeer van jouw event.</div>
     </div>
-
     <div class="faq-item">
       <div class="faq-q" onclick="toggleFaq(this)">
-        <span class="faq-q-text">Hoe lang duurt de ervaring per gast?</span>
+        <span class="faq-q-text">Hoe lang duurt het per gast?</span>
         <span class="faq-icon">+</span>
       </div>
-      <div class="faq-a">Gemiddeld 5–8 minuten per gast, inclusief mengen en labelen. Bij een volle service kunnen we 50–80 gasten per uur bedienen. We berekenen vooraf de capaciteit op basis van jouw gastaantal.</div>
+      <div class="faq-a">Gemiddeld 5–8 minuten per gast. Bij Full Service bedienen we 50–80 gasten per uur.</div>
     </div>
-
     <div class="faq-item">
       <div class="faq-q" onclick="toggleFaq(this)">
-        <span class="faq-q-text">Kan ik mijn logo op de flacons zetten?</span>
+        <span class="faq-q-text">Kan mijn logo op de flacons?</span>
         <span class="faq-icon">+</span>
       </div>
-      <div class="faq-a">Absoluut. Labels, doosjes en zelfs de bar zelf kunnen volledig worden aangepast aan jouw huisstijl. Stuur je brandingrichtlijnen door en wij verzorgen het overige.</div>
+      <div class="faq-a">Ja — labels, doosjes en de bar zelf zijn volledig aanpasbaar aan jouw huisstijl. Stuur je brandguide op na boeking.</div>
     </div>
-
     <div class="faq-item">
       <div class="faq-q" onclick="toggleFaq(this)">
-        <span class="faq-q-text">Is de parfum veilig voor de huid?</span>
+        <span class="faq-q-text">Is de parfum huidveilig?</span>
         <span class="faq-icon">+</span>
       </div>
-      <div class="faq-a">Ja. We werken uitsluitend met dermatologisch geteste, huidveilige geurnoten die voldoen aan IFRA-richtlijnen. Alle ingrediënten zijn ook op aanvraag beschikbaar voor gasten met allergieën.</div>
+      <div class="faq-a">Ja. We werken uitsluitend met IFRA-gecertificeerde, dermatologisch geteste geurnoten. Ingrediëntenlijst beschikbaar op aanvraag.</div>
     </div>
-
-    <div class="faq-item">
-      <div class="faq-q" onclick="toggleFaq(this)">
-        <span class="faq-q-text">Verschil tussen Starter Kit en Full Service?</span>
-        <span class="faq-icon">+</span>
-      </div>
-      <div class="faq-a">Met de Starter Kit ontvang je alle materialen per post — perfect voor kleinere of intieme events waarbij jij zelf de bar bemant. Full Service betekent dat één van onze consultants aanwezig is en alles verzorgt, van opbouw tot afbouw. Ideaal voor grotere events of wanneer je zelf volledig wilt genieten.</div>
-    </div>
-
   </div>
 </section>
 
 <!-- CTA -->
 <section id="cta" class="cta-section">
-  <p class="cta-label">Gratis kennismakingsgesprek — 20 min</p>
-  <h2 class="cta-h2">Jouw gasten<br>verdienen meer.</h2>
-  <p class="cta-sub">Een parfumbar vergeet niemand. Plan een vrijblijvend gesprek en ontdek hoe we jouw event onvergetelijk maken — voordat jouw datum is weggegeven.</p>
-  <a class="btn-pill" href="mailto:hallo@happyhourevents.nl?subject=Offerte Perfume Bar">Bekijk beschikbaarheid ↗</a>
+  <p class="cta-label">Gratis gesprek · 20 min · geen verplichtingen</p>
+  <h2 class="cta-h2">Ze praten er nog<br>weken over. Of ze<br>vergeten het morgen.</h2>
+  <p class="cta-sub">Een parfumbar vergeet niemand. Jij kiest wat jouw gasten onthouden. Check vandaag je datum.</p>
+  <a class="btn-pill" href="mailto:hallo@happyhourevents.nl?subject=Offerte Perfume Bar">Check beschikbaarheid ↗</a>
   <div style="height: 110px;"></div>
 </section>
 
